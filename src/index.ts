@@ -27,6 +27,9 @@ export async function getBook (name: string) {
   const params = { q: name, maxResults: 1 }
 
   const res = await axios.get(url, { params })
+  if (res.data.items.length === 0) {
+    return 1
+  }
   const data = res.data.items[0]
   const volumeInfo = data.volumeInfo
 
