@@ -1,3 +1,5 @@
+# README WIP (WORK IN PROGRESS)
+
 # Getting started
 Use the `getBook` function to get a `Book`.
 Example:
