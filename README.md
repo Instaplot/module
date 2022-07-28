@@ -19,6 +19,7 @@ A `Book` object has these attributes from Google Books API
 - `publisher`
 - `publishedDate`
 - `thumbnailURL`
+- `totalItems`
 
 # getBook
 The `getBook` function currently takes only one argument `name`.
