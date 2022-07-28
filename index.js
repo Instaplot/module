@@ -1,16 +1,7 @@
 const axios = require('axios').default
 
 class Book {
-  id: string
-  title: string
-  authors: string[]
-  description: string
-  publisher: string
-  publishedDate: Date
-  thumbnailURL: string
-  totalItems: number
-
-  constructor (id: string, title: string, authors: string[], description: string, publisher: string, publishedDate: Date, thumbnailURL: string, totalItems: number) {
+  constructor (id, title, authors, description, publisher, publishedDate, thumbnailURL, totalItems) {
     this.id = id
     this.title = title
     this.authors = authors
@@ -22,12 +13,12 @@ class Book {
   }
 }
 
-export async function getBook (name: string) {
+export async function getBook (name) {
   const url = 'https://www.googleapis.com/books/v1/volumes'
   const params = { q: name, maxResults: 1 }
 
   const res = await axios.get(url, { params })
-  if (res.data.items.length === 0) {
+  if (res.data.items === undefined) {
     return 1
   }
   const data = res.data.items[0]
