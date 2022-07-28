@@ -1,33 +1,35 @@
 const axios = require('axios').default
 
 class Book {
-  id: string;
-  title: string;
-  authors: string[];
-  description: string;
-  publisher: string;
-  publishedDate: Date;
-  thumbnailURL: string;
+  id: string
+  title: string
+  authors: string[]
+  description: string
+  publisher: string
+  publishedDate: Date
+  thumbnailURL: string
+  totalItems: number
 
-  constructor(id: string, title: string, authors: string[], description: string, publisher: string, publishedDate: Date, thumbnailURL: string) {
-      this.id = id;
-      this.title = title;
-      this.authors = authors;
-      this.description = description;
-      this.publisher = publisher;
-      this.publishedDate = publishedDate;
-      this.thumbnailURL = thumbnailURL;
+  constructor (id: string, title: string, authors: string[], description: string, publisher: string, publishedDate: Date, thumbnailURL: string, totalItems: number) {
+    this.id = id
+    this.title = title
+    this.authors = authors
+    this.description = description
+    this.publisher = publisher
+    this.publishedDate = publishedDate
+    this.thumbnailURL = thumbnailURL
+    this.totalItems = totalItems
   }
 }
 
 export async function getBook (name: string) {
-  const url = 'https://www.googleapis.com/books/v1/volumes';
-  const params = { q: name, maxResults: 1 };
+  const url = 'https://www.googleapis.com/books/v1/volumes'
+  const params = { q: name, maxResults: 1 }
 
-  const res = await axios.get(url, { params });
-  const data = res.data.items[0];
-  const volumeInfo = data.volumeInfo;
-  
+  const res = await axios.get(url, { params })
+  const data = res.data.items[0]
+  const volumeInfo = data.volumeInfo
+
   return new Book(
     data.id,
     volumeInfo.title,
@@ -35,6 +37,7 @@ export async function getBook (name: string) {
     volumeInfo.description,
     volumeInfo.publisher,
     volumeInfo.publishedDate,
-    volumeInfo.imageLinks.thumbnail
-  );
+    volumeInfo.imageLinks.thumbnail,
+    data.totalItems
+  )
 }
